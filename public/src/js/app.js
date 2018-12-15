@@ -25,6 +25,20 @@ var promise = new Promise(function(resolve, reject) {
 	}, 3000);
 });
 
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://httpbin.org/ip');
+xhr.responseType = 'json';
+
+xhr.onload = function() {
+	console.log(xhr.response);
+};
+
+xhr.onerror = function() {
+	console.log('Error!');
+}  
+
+xhr.send();
+
 fetch('https://httpbin.org/ip')
 	.then(function(response) {
 		console.log(response);
@@ -43,6 +57,7 @@ fetch('https://httpbin.org/post', {
 		'Content-Type': 'application/json',
 		'Accept': 'application/json',
 	},
+	mode: 'cors',
 	body: JSON.stringify({message: 'Does this work?'})
 }) 
 	.then(function(response) {
